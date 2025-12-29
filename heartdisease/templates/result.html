@@ -3,103 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <title>Heart Attack Risk Result</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body { background-color: #f8f9fa; }
-        .card { border-radius: 15px; }
+        .container { margin-top: 50px; }
+        .card { margin-bottom: 20px; }
         .risk-high { color: #dc3545; font-weight: bold; }
         .risk-moderate { color: #ffc107; font-weight: bold; }
         .risk-low { color: #28a745; font-weight: bold; }
-        .section-title { border-bottom: 2px solid #dee2e6; padding-bottom: 5px; margin-bottom: 15px; }
-        .btn-print { margin-top: 20px; }
+        .tips { font-size: 0.9rem; }
     </style>
 </head>
 <body>
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10">
+<div class="container">
+    <h2 class="mb-4 text-center">Heart Attack Risk Assessment Result</h2>
 
-            <!-- Risk Card -->
-            <div class="card shadow p-4 mb-4 text-center">
-                <h3 class="mb-3">Your Heart Attack Risk Level</h3>
-                <h2 class="mb-3">
-                    {% if risk_level == 'High' %}
-                        <span class="risk-high">{{ risk_level }} ⚠️</span>
-                    {% elif risk_level == 'Moderate' %}
-                        <span class="risk-moderate">{{ risk_level }} ⚠</span>
-                    {% else %}
-                        <span class="risk-low">{{ risk_level }} ✅</span>
-                    {% endif %}
-                </h2>
-            </div>
-
-            <!-- User Input Summary -->
-            <div class="card shadow p-4 mb-4">
-                <h5 class="section-title">Your Input Summary</h5>
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr><th>Age Group</th><td>{{ inputs.age_group }}</td></tr>
-                        <tr><th>Gender</th><td>{{ inputs.gender }}</td></tr>
-                        <tr><th>Chest Pain</th><td>{{ inputs.chest_pain }}</td></tr>
-                        <tr><th>Shortness of Breath</th><td>{{ inputs.short_breath }}</td></tr>
-                        <tr><th>Fatigue</th><td>{{ inputs.fatigue }}</td></tr>
-                        <tr><th>Dizziness / Nausea</th><td>{{ inputs.dizziness }}</td></tr>
-                        <tr><th>Cold Sweating</th><td>{{ inputs.cold_sweat }}</td></tr>
-                        <tr><th>Smoking Status</th><td>{{ inputs.smoker }}</td></tr>
-                        <tr><th>Diabetes</th><td>{{ inputs.diabetes }}</td></tr>
-                        <tr><th>Blood Pressure</th><td>{{ inputs.blood_pressure }}</td></tr>
-                        <tr><th>Family History</th><td>{{ inputs.family_history }}</td></tr>
-                        <tr><th>Physical Activity Level</th><td>{{ inputs.inactive }}</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Step-by-Step Recommendations -->
-            <div class="card shadow p-4 mb-4">
-                <h5 class="section-title">Step-by-Step Recommendations</h5>
-                <ul class="list-group list-group-flush">
-                    {% if risk_level == 'High' %}
-                        <li class="list-group-item">Consult a cardiologist immediately.</li>
-                        <li class="list-group-item">Maintain a heart-healthy diet rich in fruits and vegetables.</li>
-                        <li class="list-group-item">Monitor blood pressure, cholesterol, and blood sugar regularly.</li>
-                        <li class="list-group-item">Avoid smoking and reduce sedentary habits.</li>
-                        <li class="list-group-item">Schedule follow-up tests as recommended by a doctor.</li>
-                    {% elif risk_level == 'Moderate' %}
-                        <li class="list-group-item">Schedule a checkup with your doctor.</li>
-                        <li class="list-group-item">Follow a balanced diet and exercise moderately.</li>
-                        <li class="list-group-item">Avoid smoking and excessive salt intake.</li>
-                        <li class="list-group-item">Monitor your vitals regularly.</li>
-                    {% else %}
-                        <li class="list-group-item">Maintain regular exercise and a healthy diet.</li>
-                        <li class="list-group-item">Continue monitoring your blood pressure and heart health.</li>
-                        <li class="list-group-item">Avoid smoking and maintain active lifestyle.</li>
-                        <li class="list-group-item">Schedule routine health checkups periodically.</li>
-                    {% endif %}
-                </ul>
-            </div>
-
-            <!-- Educational Tips Section -->
-<div class="card shadow p-4 mb-4">
-    <h5 class="section-title">Heart Health Tips</h5>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">Maintain a balanced diet rich in fruits, vegetables, whole grains, and lean proteins.</li>
-        <li class="list-group-item">Engage in at least 150 minutes of moderate-intensity exercise per week.</li>
-        <li class="list-group-item">Avoid smoking and limit alcohol consumption.</li>
-        <li class="list-group-item">Monitor your blood pressure, cholesterol, and blood sugar regularly.</li>
-        <li class="list-group-item">Manage stress through mindfulness, yoga, or hobbies.</li>
-        <li class="list-group-item">Maintain a healthy weight to reduce strain on your heart.</li>
-        <li class="list-group-item">Recognize warning signs such as chest pain, shortness of breath, dizziness, or cold sweats.</li>
-    </ul>
-</div>
-
-            <!-- Action Buttons -->
-            <div class="text-center">
-                <a href="/" class="btn btn-secondary me-2">Check Again</a>
-                <button class="btn btn-primary btn-print" onclick="window.print()">Download / Print Report</button>
-            </div>            
-
+    <!-- Diagnosis Card -->
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4>Diagnosis</h4>
+        </div>
+        <div class="card-body">
+            <p class="fs-5">
+                {% if diagnosis == "High Risk" %}
+                    <span class="risk-high">{{ diagnosis }}</span>
+                {% elif diagnosis == "Moderate Risk" %}
+                    <span class="risk-moderate">{{ diagnosis }}</span>
+                {% else %}
+                    <span class="risk-low">{{ diagnosis }}</span>
+                {% endif %}
+            </p>
+            <p>{{ recommendation }}</p>
         </div>
     </div>
+
+    <!-- Input Summary Card -->
+    <div class="card shadow">
+        <div class="card-header bg-secondary text-white">
+            <h4>Input Summary</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tbody>
+                {% for key, value in inputs.items() %}
+                    <tr>
+                        <th>{{ key }}</th>
+                        <td>{{ value }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Step-by-Step Recommendation -->
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <h4>Step-by-Step Recommendations</h4>
+        </div>
+        <div class="card-body">
+            {% if diagnosis == "High Risk" %}
+                <ol>
+                    <li>Contact your cardiologist immediately.</li>
+                    <li>Avoid strenuous activities.</li>
+                    <li>Maintain a strict heart-healthy diet.</li>
+                    <li>Monitor symptoms and keep emergency contacts ready.</li>
+                </ol>
+            {% elif diagnosis == "Moderate Risk" %}
+                <ol>
+                    <li>Schedule a medical checkup.</li>
+                    <li>Improve lifestyle habits: diet, exercise, reduce stress.</li>
+                    <li>Monitor blood pressure and heart symptoms regularly.</li>
+                </ol>
+            {% else %}
+                <ol>
+                    <li>Maintain regular exercise and a balanced diet.</li>
+                    <li>Continue routine health checkups.</li>
+                    <li>Stay active and avoid unhealthy habits.</li>
+                </ol>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Educational Tips -->
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <h4>Educational Tips</h4>
+        </div>
+        <div class="card-body tips">
+            <ul>
+                <li>Eat a diet rich in vegetables, fruits, and whole grains.</li>
+                <li>Exercise at least 30 minutes daily.</li>
+                <li>Avoid smoking and limit alcohol consumption.</li>
+                <li>Monitor blood pressure, cholesterol, and blood sugar levels regularly.</li>
+                <li>Stay mentally active and manage stress effectively.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Download Report -->
+    <div class="text-center mt-4">
+        <button class="btn btn-primary" onclick="window.print()">Download/Print Report</button>
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
